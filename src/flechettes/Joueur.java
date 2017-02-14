@@ -5,6 +5,7 @@
  */
 package flechettes;
 
+import java.awt.Color;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -39,6 +40,61 @@ public class Joueur {
         public int getLancer3() {return Lancer3.get();}
         public void setLancer3(int value) {Lancer3.set(value);}
         public IntegerProperty Lancer3Property() {return Lancer3;}
+
+    private Partie partie;    
+        
+    int numLancer=1;
+        
+    public Joueur(String name,Partie p) {
+        setNom(name);
+        setScore(301);
+        partie = p;
+    }
+    
+    public void jouer(int numLancer,int value){
+        switch(numLancer){
+            case 1:
+                setLancer1(value);
+                numLancer++;
+                break;
+            case 2:
+                setLancer2(value);
+                numLancer++;
+                break;
+            case 3:
+                setLancer3(value);
+                calculScore();
+        }
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Nom=" + getNom() + ", Score=" + getScore();
+    }
+
+    private void calculScore() {
+        int newScore = getScore() - getLancer1() - getLancer2() - getLancer3();
+        if(newScore < 0){
+            System.out.println("PERDU");
+            newScore = getScore();
+            partie.nextPlayer();
+        }
+        else if(newScore == 0){
+            System.out.println("GAGNE");
+        }
+        else{
+            setScore(newScore);
+            partie.nextPlayer();
+        }
+    }
+
+    
+    
+    
+        
+    
+        
         
         
         

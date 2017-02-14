@@ -25,6 +25,15 @@ public class Flechettes extends Application {
         
         stage.setScene(scene);
         stage.show();
+        
+        Partie p = new Partie();
+        
+        Joueur j1 = new Joueur("Nicoco",p);
+        Joueur j2 = new Joueur("Jeje",p);
+        
+        
+        p.create(2, j1,j2);
+        System.out.println(p.toString());
     }
 
     /**
